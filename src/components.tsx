@@ -2,7 +2,7 @@ import type { FunctionComponent, ReactHTML, ReactNode } from "react";
 
 type ValueOf<T> = T[keyof T];
 
-export type Content =
+export type RichTextContent =
   | {
       type:
         | "doc"
@@ -13,7 +13,7 @@ export type Content =
         | "listItem";
       // If the node is empty in the editor, it won't have `content` set. For
       // example, you might add a new empty paragraph inside the editor.
-      content?: Content[];
+      content?: RichTextContent[];
       attrs: {
         language: string | null;
       };
@@ -33,7 +33,7 @@ export type Content =
   | {
       type: "heading";
       // If the node is empty in the editor, it won't have `content` set.
-      content?: Content[];
+      content?: RichTextContent[];
       attrs: {
         level: 1 | 2 | 3 | 4;
       };
@@ -61,7 +61,7 @@ export const RichText = ({
   data,
   components,
 }: {
-  data: Content | Content[];
+  data: RichTextContent | RichTextContent[];
   components?: ReactHTML;
 }) => {
   const items = Array.isArray(data) ? data : [data];
