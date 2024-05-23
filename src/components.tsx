@@ -57,7 +57,7 @@ export type Content =
       )[];
     };
 
-export const RenderRichText = ({
+export const RichText = ({
   data,
   components,
 }: {
@@ -112,7 +112,7 @@ export const RenderRichText = ({
 
     let Element: keyof JSX.IntrinsicElements | ValueOf<ReactHTML> | null = null;
     let children: JSX.Element | string | null = item.content ? (
-      <RenderRichText data={item.content} components={components} />
+      <RichText data={item.content} components={components} />
     ) : null;
     let language = "plaintext";
     switch (item.type) {
