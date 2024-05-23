@@ -28,7 +28,7 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "/components": {
+    "./components": {
       "types": "./dist/components.d.mts",
       "import": "./dist/components.mjs",
       "require": "./dist/components.js"
