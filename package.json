@@ -50,7 +50,7 @@
         "dist/index.d.ts"
       ],
       "types": [
-        "dist/index.d.ts"
+        "dist/types.d.ts"
       ]
     }
   },
