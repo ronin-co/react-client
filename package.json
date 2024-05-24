@@ -27,17 +27,11 @@
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    },
-    "./components": {
-      "types": "./dist/components.d.mts",
-      "import": "./dist/components.mjs",
-      "require": "./dist/components.js"
     }
   },
   "typesVersions": {
     "*": {
-      "*": ["dist/index.d.ts"],
-      "components": ["dist/components.d.mts"]
+      "*": ["dist/index.d.ts"]
     }
   },
   "dependencies": {
