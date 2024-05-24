@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import type { StoredObject } from "ronin/types";
 
 export interface ImageProps {
@@ -54,7 +54,7 @@ const Image = ({
   quality,
   loading,
 }: ImageProps) => {
-  const imageRef = useRef<HTMLImageElement | null>(null);
+  const imageElement = useRef<HTMLImageElement | null>(null);
   const renderTime = useRef<number>(Date.now());
 
   const isMediaObject = typeof input === "object" && input !== null;
@@ -94,14 +94,14 @@ const Image = ({
   const placeholder =
     input && typeof input !== "string" ? input.placeholder?.base64 : null;
 
-  const onLoad = () => {
+  const onLoad = useCallback(() => {
     const duration = Date.now() - renderTime.current;
     const threshold = 150;
 
     // Fade in and gradually reduce blur of the real image if loading takes
     // longer than the specified threshold.
     if (duration > threshold) {
-      imageRef.current?.animate(
+      imageElement.current?.animate(
         [
           { filter: "blur(4px)", opacity: 0 },
           { filter: "blur(0px)", opacity: 1 },
@@ -111,7 +111,7 @@ const Image = ({
         },
       );
     }
-  };
+  }, [renderTime.current, imageElement.current]);
 
   return (
     <div
@@ -144,7 +144,7 @@ const Image = ({
         decoding="async"
         onLoad={onLoad}
         loading={loading}
-        ref={imageRef}
+        ref={imageElement}
         src={source}
         srcSet={responsiveSource}
       />
