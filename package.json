@@ -15,35 +15,29 @@
     "test": "bun test",
     "prepare": "husky"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "repository": "ronin-co/react-ronin",
   "homepage": "https://github.com/ronin-co/react-ronin",
-  "keywords": [
-    "ronin",
-    "react",
-    "client",
-    "database",
-    "orm"
-  ],
+  "keywords": ["ronin", "react", "client", "database", "orm"],
   "lint-staged": {
-    "**/*": [
-      "bunx @biomejs/biome format --write"
-    ]
+    "**/*": ["bunx @biomejs/biome format --write"]
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.mts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types.js",
+      "require": "./dist/types.cjs",
+      "types": "./dist/types.d.ts"
     }
   },
   "typesVersions": {
     "*": {
-      "*": [
-        "dist/index.d.ts"
-      ]
+      "*": ["dist/index.d.ts"],
+      "types": ["dist/index.d.ts"]
     }
   },
   "dependencies": {
