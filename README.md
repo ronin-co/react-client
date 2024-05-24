@@ -24,7 +24,7 @@ Afterward, you can start invoking RONIN from anywhere in your code:
 ```tsx
 import { get, Image, RichText } from 'react-ronin';
 
-async function BlogPost() {
+export default async function Post() {
   const post = await get.post.with.slug('intro');
 
   return (
