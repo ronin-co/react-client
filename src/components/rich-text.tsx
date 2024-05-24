@@ -57,7 +57,7 @@ export type RichTextContent =
       )[];
     };
 
-export const RichText = ({
+const RichText = ({
   data,
   components,
 }: {
@@ -177,3 +177,5 @@ export const RichText = ({
     );
   });
 };
+
+export default RichText;
