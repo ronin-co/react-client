@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, mock, test } from "bun:test";
-import createSyntaxFactory from "@/index";
+import createSyntaxFactory from "ronin";
 
 let mockResolvedRequestText: string | undefined = undefined;
 
