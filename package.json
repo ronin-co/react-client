@@ -15,22 +15,12 @@
     "test": "bun test",
     "prepare": "husky"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "repository": "ronin-co/react-ronin",
   "homepage": "https://github.com/ronin-co/react-ronin",
-  "keywords": [
-    "ronin",
-    "react",
-    "client",
-    "database",
-    "orm"
-  ],
+  "keywords": ["ronin", "react", "client", "database", "orm"],
   "lint-staged": {
-    "**/*": [
-      "bunx @biomejs/biome format --write"
-    ]
+    "**/*": ["bunx @biomejs/biome format --write"]
   },
   "exports": {
     ".": {
@@ -46,12 +36,8 @@
   },
   "typesVersions": {
     "*": {
-      "*": [
-        "dist/index.d.ts"
-      ],
-      "components": [
-        "dist/components.d.mts"
-      ]
+      "*": ["dist/index.d.ts"],
+      "components": ["dist/components.d.mts"]
     }
   },
   "dependencies": {
@@ -61,6 +47,7 @@
     "@biomejs/biome": "1.7.3",
     "@types/bun": "1.1.3",
     "@types/react": "18.3.2",
+    "@types/web": "0.0.147",
     "bunchee": "5.1.5",
     "husky": "9.0.11",
     "lint-staged": "15.2.4",

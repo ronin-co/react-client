@@ -95,6 +95,7 @@ const Image = ({
         <img
           style={{ position: "absolute", width: "100%", height: "100%" }}
           src={placeholder}
+          alt={alt}
         />
       )}
 
