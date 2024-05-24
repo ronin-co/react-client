@@ -1,7 +1,7 @@
 import { type ImgHTMLAttributes, useRef } from "react";
 import type { StoredObject } from "ronin/types";
 
-export interface ImageRootProps {
+export interface ImageProps {
   alt?: ImgHTMLAttributes<HTMLImageElement>["alt"];
   quality?: number;
   src: string | StoredObject;
@@ -19,7 +19,7 @@ const Image = ({
   height: defaultHeight,
   quality,
   loading,
-}: ImageRootProps) => {
+}: ImageProps) => {
   const imageRef = useRef<HTMLImageElement | null>(null);
   const init = useRef(Date.now());
 
