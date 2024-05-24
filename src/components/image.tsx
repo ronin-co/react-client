@@ -111,7 +111,7 @@ const Image = ({
         },
       );
     }
-  }, [renderTime.current, imageElement.current]);
+  }, []);
 
   return (
     <div
