@@ -1,14 +1,48 @@
-import { type ImgHTMLAttributes, useRef } from "react";
+import { useRef } from "react";
 import type { StoredObject } from "ronin/types";
 
 export interface ImageProps {
-  alt?: ImgHTMLAttributes<HTMLImageElement>["alt"];
+  /**
+   * Defines text that can replace the image in the page.
+   */
+  alt?: string;
+  /**
+   * The quality level at which the image should be displayed. A lower quality
+   * ensures a faster loading speed, but might also effect the visual
+   * appearance, so it is essential to choose carefully.
+   *
+   * Must be an integer between 0 and 100.
+   */
   quality?: number;
+  /**
+   * The value of a RONIN Blob field.
+   */
   src: string | StoredObject;
+  /**
+   * The intrinsic size of the image in pixels, if its width and height are the
+   * same. Must be an integer without a unit.
+   */
   size?: number;
+  /**
+   * The intrinsic width of the image in pixels. Must be an integer without a
+   * unit.
+   */
   width?: number;
+  /**
+   * The intrinsic height of the image, in pixels. Must be an integer without
+   * a unit.
+   */
   height?: number;
-  loading?: ImgHTMLAttributes<HTMLImageElement>["loading"];
+  /**
+   * Indicates how the browser should load the image.
+   *
+   * Providing the value "lazy" defers loading the image until it reaches a
+   * calculated distance from the viewport, as defined by the browser. The
+   * intent is to avoid the network and storage bandwidth needed to handle the
+   * image until it's reasonably certain that it will be needed. This generally
+   * improves the performance of the content in most typical use cases.
+   */
+  loading?: "lazy";
 }
 
 const Image = ({
@@ -21,7 +55,7 @@ const Image = ({
   loading,
 }: ImageProps) => {
   const imageRef = useRef<HTMLImageElement | null>(null);
-  const init = useRef(Date.now());
+  const renderTime = useRef<number>(Date.now());
 
   const isMediaObject = typeof input === "object" && input !== null;
   const width = defaultSize || defaultWidth;
@@ -61,7 +95,7 @@ const Image = ({
     input && typeof input !== "string" ? input.placeholder?.base64 : null;
 
   const onLoad = () => {
-    const duration = Date.now() - init.current;
+    const duration = Date.now() - renderTime.current;
     const threshold = 150;
 
     // Fade in and gradually reduce blur of the real image if loading takes
