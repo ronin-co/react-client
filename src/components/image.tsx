@@ -33,11 +33,10 @@ const Image = ({
     );
 
   // Validate given `quality` property.
-  if (quality && (quality < 0 || quality > 100)) {
+  if (quality && (quality < 0 || quality > 100))
     throw new Error(
       "The given `quality` was not in the range between 0 and 100.",
     );
-  }
 
   const optimizationParams = new URLSearchParams({
     ...(width ? { w: width.toString() } : {}),
