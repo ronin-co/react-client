@@ -1,6 +1,6 @@
 {
   "name": "react-ronin",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -15,12 +15,22 @@
     "test": "bun test",
     "prepare": "husky"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": "ronin-co/react-ronin",
   "homepage": "https://github.com/ronin-co/react-ronin",
-  "keywords": ["ronin", "react", "client", "database", "orm"],
+  "keywords": [
+    "ronin",
+    "react",
+    "client",
+    "database",
+    "orm"
+  ],
   "lint-staged": {
-    "**/*": ["bunx @biomejs/biome format --write"]
+    "**/*": [
+      "bunx @biomejs/biome format --write"
+    ]
   },
   "exports": {
     ".": {
@@ -31,7 +41,9 @@
   },
   "typesVersions": {
     "*": {
-      "*": ["dist/index.d.ts"]
+      "*": [
+        "dist/index.d.ts"
+      ]
     }
   },
   "dependencies": {
