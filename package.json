@@ -58,7 +58,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.7.3",
     "@types/bun": "1.1.3",
-    "@types/react": "18.3.2",
+    "@types/react": "18.3.3",
     "@types/web": "0.0.147",
     "husky": "9.0.11",
     "lint-staged": "15.2.4",
