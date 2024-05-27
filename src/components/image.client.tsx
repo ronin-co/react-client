@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import type { StoredObject } from "ronin/types";
 
 export interface ImageProps {

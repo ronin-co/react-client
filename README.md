@@ -21,10 +21,19 @@ Next, create a new app token on the [RONIN dashboard](http://ronin.co) (under "A
 
 Afterward, you can start invoking RONIN from anywhere in your code:
 
-```typescript
-import { get } from 'react-ronin';
+```tsx
+import { get, Image, RichText } from 'react-ronin';
 
-const posts = await get.posts();
+export default async function Post() {
+  const post = await get.post.with.slug('intro');
+
+  return (
+    <div>
+      <Image src={post.image} />
+      <RichText data={post.content} />
+    </div>
+  );
+};
 ```
 
 That's it! 🎉
