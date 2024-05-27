@@ -61,7 +61,7 @@
     "@types/react": "18.3.2",
     "@types/web": "0.0.147",
     "husky": "9.0.11",
-    "lint-staged": "15.2.4",
+    "lint-staged": "15.2.5",
     "msw": "2.3.0",
     "react": "18.3.1",
     "typescript": "5.4.5"
