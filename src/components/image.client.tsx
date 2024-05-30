@@ -46,13 +46,13 @@ export interface ImageProps {
    */
   loading?: "lazy";
   /**
-   * The class names for the image container (not the iamge itself).
+   * The class names for the image container (not the image itself).
    *
    */
   className?: string;
 
   /**
-   * The inline style for the image container (not the iamge itself).
+   * The inline style for the image container (not the image itself).
    */
   style?: React.CSSProperties;
 }
