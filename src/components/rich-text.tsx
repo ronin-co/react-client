@@ -1,8 +1,4 @@
-import React, {
-  type FunctionComponent,
-  type ReactHTML,
-  type ReactNode,
-} from "react";
+import type { FunctionComponent, ReactHTML, ReactNode } from "react";
 
 type ValueOf<T> = T[keyof T];
 
