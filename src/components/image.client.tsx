@@ -21,8 +21,16 @@ export interface ImageProps {
    * appearance, so it is essential to choose carefully.
    *
    * Must be an integer between 0 and 100.
+   *
+   * @default 80
    */
   quality?: number;
+  /**
+   * The format of the image.
+   *
+   * @default "webp"
+   */
+  format?: "webp" | "jpeg" | "png" | "original";
   /**
    * The value of a RONIN Blob field.
    */
@@ -44,6 +52,8 @@ export interface ImageProps {
   height?: number;
   /**
    * Specifies how the image should be resized to fit its container.
+   *
+   * @default "cover"
    */
   fit?: CSSProperties["objectFit"];
   /**
@@ -81,8 +91,9 @@ const Image = forwardRef<HTMLDivElement, ImageProps>(
       width: defaultWidth,
       height: defaultHeight,
       fit = "cover",
+      format = "webp",
+      quality = 80,
       aspect,
-      quality,
       loading,
       style,
       className,
@@ -129,15 +140,19 @@ const Image = forwardRef<HTMLDivElement, ImageProps>(
     const optimizationParams = new URLSearchParams({
       ...(width ? { w: width.toString() } : {}),
       ...(height ? { h: height.toString() } : {}),
+      ...(format !== "original" ? { fm: format } : {}),
+
       fit: supportedFitValues.includes(fit) ? fit : "cover",
-      q: quality ? quality.toString() : "100",
+      q: quality.toString(),
     });
 
     const responsiveOptimizationParams = new URLSearchParams({
       ...(width ? { h: (width * 2).toString() } : {}),
       ...(height ? { h: (height * 2).toString() } : {}),
+      ...(format !== "original" ? { fm: format } : {}),
+
       fit: supportedFitValues.includes(fit) ? fit : "cover",
-      q: quality ? quality.toString() : "100",
+      q: quality.toString(),
     });
 
     const source = isMediaObject ? `${input.src}?${optimizationParams}` : input;
