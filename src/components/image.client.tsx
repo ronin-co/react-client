@@ -7,6 +7,7 @@ import React, {
   type CSSProperties,
 } from "react";
 import type { StoredObject } from "ronin/types";
+import type { StoredObject } from "ronin/types";
 
 const supportedFitValues = ["fill", "contain", "cover"];
 

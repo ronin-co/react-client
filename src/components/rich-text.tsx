@@ -109,7 +109,11 @@ const RichText = ({
         return RenderingElement ? (
           <RenderingElement
             {...attributes}
-            key={"rendering" + String(position)}
+            key={
+              (typeof RenderingElement === "string"
+                ? RenderingElement
+                : RenderingElement.name) + String(position)
+            }
           >
             {final}
           </RenderingElement>
@@ -119,12 +123,14 @@ const RichText = ({
       }, item.text as ReactNode);
     }
 
+    const richtTextPrefix = "rich-text-";
+
     let Element: keyof JSX.IntrinsicElements | ValueOf<ReactHTML> | null = null;
     let children: JSX.Element | string | null = item.content ? (
       <RichText
         data={item.content}
         components={components}
-        key={"rich-text" + String(position)}
+        key={richtTextPrefix + String(position)}
       />
     ) : null;
     let language = "plaintext";
