@@ -107,7 +107,10 @@ const RichText = ({
         }> | null;
 
         return RenderingElement ? (
-          <RenderingElement {...attributes} key={"rendering" + position}>
+          <RenderingElement
+            {...attributes}
+            key={"rendering" + String(position)}
+          >
             {final}
           </RenderingElement>
         ) : (
@@ -121,7 +124,7 @@ const RichText = ({
       <RichText
         data={item.content}
         components={components}
-        key={"rich-text" + position}
+        key={"rich-text" + String(position)}
       />
     ) : null;
     let language = "plaintext";
