@@ -1,8 +1,4 @@
-import React, {
-  type FunctionComponent,
-  type ReactHTML,
-  type ReactNode,
-} from "react";
+import type { FunctionComponent, ReactHTML, ReactNode } from "react";
 
 type ValueOf<T> = T[keyof T];
 
@@ -107,7 +103,9 @@ const RichText = ({
         }> | null;
 
         return RenderingElement ? (
-          <RenderingElement {...attributes}>{final}</RenderingElement>
+          <RenderingElement {...attributes} key={"rendering" + position}>
+            {final}
+          </RenderingElement>
         ) : (
           final
         );
@@ -116,7 +114,11 @@ const RichText = ({
 
     let Element: keyof JSX.IntrinsicElements | ValueOf<ReactHTML> | null = null;
     let children: JSX.Element | string | null = item.content ? (
-      <RichText data={item.content} components={components} />
+      <RichText
+        data={item.content}
+        components={components}
+        key={"rich-text" + position}
+      />
     ) : null;
     let language = "plaintext";
     switch (item.type) {
