@@ -107,16 +107,31 @@ const RichText = ({
         }> | null;
 
         return RenderingElement ? (
-          <RenderingElement {...attributes}>{final}</RenderingElement>
+          <RenderingElement
+            {...attributes}
+            key={
+              (typeof RenderingElement === "string"
+                ? RenderingElement
+                : RenderingElement.name) + String(position)
+            }
+          >
+            {final}
+          </RenderingElement>
         ) : (
           final
         );
       }, item.text as ReactNode);
     }
 
+    const richtTextPrefix = "rich-text-";
+
     let Element: keyof JSX.IntrinsicElements | ValueOf<ReactHTML> | null = null;
     let children: JSX.Element | string | null = item.content ? (
-      <RichText data={item.content} components={components} />
+      <RichText
+        data={item.content}
+        components={components}
+        key={richtTextPrefix + String(position)}
+      />
     ) : null;
     let language = "plaintext";
     switch (item.type) {
