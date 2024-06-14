@@ -53,11 +53,11 @@
     }
   },
   "dependencies": {
-    "ronin": "4.0.8"
+    "ronin": "4.0.9"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.1",
-    "@types/bun": "1.1.3",
+    "@types/bun": "1.1.4",
     "@types/react": "18.3.3",
     "@types/web": "0.0.148",
     "husky": "9.0.11",
