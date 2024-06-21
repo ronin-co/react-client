@@ -1,11 +1,8 @@
 "use client";
 
-import React, {
-  useCallback,
-  useRef,
-  forwardRef,
-  type CSSProperties,
-} from "react";
+// We are purposefully importing `React` here, as the build output contains
+// references to it, and those would fail if we don't import it explicitly.
+import React, { useCallback, useRef, forwardRef } from "react";
 import type { StoredObject } from "ronin/types";
 
 const supportedFitValues = ["fill", "contain", "cover"];
@@ -55,7 +52,7 @@ export interface ImageProps {
    *
    * @default "cover"
    */
-  fit?: CSSProperties["objectFit"];
+  fit?: React.CSSProperties["objectFit"];
   /**
    * The aspect ratio of the image. Can be "square", "video", or a custom string.
    */
@@ -79,7 +76,7 @@ export interface ImageProps {
   /**
    * The inline style for the image container (not the image itself).
    */
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
 const Image = forwardRef<HTMLDivElement, ImageProps>(
