@@ -53,18 +53,18 @@
     }
   },
   "dependencies": {
-    "ronin": "4.0.14"
+    "ronin": "4.1.4"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@types/bun": "1.1.6",
     "@types/react": "18.3.3",
-    "@types/web": "0.0.150",
+    "@types/web": "0.0.151",
     "husky": "9.0.11",
     "lint-staged": "15.2.7",
     "msw": "2.3.1",
     "react": "18.3.1",
-    "typescript": "5.5.2"
+    "typescript": "5.5.3"
   },
   "peerDependencies": {
     "react": ">=18.3.1"
