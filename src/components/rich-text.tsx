@@ -1,8 +1,4 @@
-import React, {
-  type FunctionComponent,
-  type ReactHTML,
-  type ReactNode,
-} from "react";
+import type { FunctionComponent, ReactHTML, ReactNode } from "react";
 
 type ValueOf<T> = T[keyof T];
 
@@ -133,7 +129,7 @@ const RichText = ({
         key={richtTextPrefix + String(position)}
       />
     ) : null;
-    let language;
+    let language: string | undefined;
     switch (item.type) {
       case "doc":
         Element = components?.div || "div";
