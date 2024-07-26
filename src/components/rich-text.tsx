@@ -133,7 +133,7 @@ const RichText = ({
         key={richtTextPrefix + String(position)}
       />
     ) : null;
-    let language = "plaintext";
+    let language;
     switch (item.type) {
       case "doc":
         Element = components?.div || "div";
@@ -176,7 +176,7 @@ const RichText = ({
     }
 
     const RenderingElement = Element as FunctionComponent<{
-      language: string;
+      language?: string;
       children: ReactNode;
     }> | null;
 
