@@ -14,7 +14,8 @@ export type RichTextContent =
         | "blockquote"
         | "codeBlock"
         | "bulletList"
-        | "listItem";
+        | "listItem"
+        | "orderedList";
       // If the node is empty in the editor, it won't have `content` set. For
       // example, you might add a new empty paragraph inside the editor.
       content?: RichTextContent[];
@@ -133,7 +134,7 @@ const RichText = ({
         key={richtTextPrefix + String(position)}
       />
     ) : null;
-    let language = "plaintext";
+    let language: string | undefined;
     switch (item.type) {
       case "doc":
         Element = components?.div || "div";
@@ -173,10 +174,14 @@ const RichText = ({
       case "listItem":
         Element = components?.li || "li";
         break;
+
+      case "orderedList":
+        Element = components?.ol || "ol";
+        break;
     }
 
     const RenderingElement = Element as FunctionComponent<{
-      language: string;
+      language?: string;
       children: ReactNode;
     }> | null;
 
