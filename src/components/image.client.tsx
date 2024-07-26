@@ -2,8 +2,7 @@
 
 // We are purposefully importing `React` here, as the build output contains
 // references to it, and those would fail if we don't import it explicitly.
-import type React from "react";
-import { forwardRef, useCallback, useRef } from "react";
+import React, { useCallback, useRef, forwardRef } from "react";
 import type { StoredObject } from "ronin/types";
 
 const supportedFitValues = ["fill", "contain", "cover"];
