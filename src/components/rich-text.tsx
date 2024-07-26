@@ -133,7 +133,7 @@ const RichText = ({
         key={richtTextPrefix + String(position)}
       />
     ) : null;
-    let language;
+    let language: string | undefined;
     switch (item.type) {
       case "doc":
         Element = components?.div || "div";
