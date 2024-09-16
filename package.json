@@ -53,18 +53,18 @@
     }
   },
   "dependencies": {
-    "ronin": "4.2.2"
+    "ronin": "4.3.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.3",
-    "@types/bun": "1.1.6",
-    "@types/react": "18.3.3",
-    "@types/web": "0.0.155",
-    "husky": "9.1.4",
-    "lint-staged": "15.2.9",
-    "msw": "2.3.5",
+    "@biomejs/biome": "1.9.1",
+    "@types/bun": "1.1.9",
+    "@types/react": "18.3.5",
+    "@types/web": "0.0.163",
+    "husky": "9.1.6",
+    "lint-staged": "15.2.10",
+    "msw": "2.4.7",
     "react": "18.3.1",
-    "typescript": "5.5.4"
+    "typescript": "5.6.2"
   },
   "peerDependencies": {
     "react": ">=18.3.1"
