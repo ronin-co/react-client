@@ -10,25 +10,26 @@
   "javascript": {
     "formatter": {
       "enabled": true,
-
+      "trailingCommas": "all",
       "arrowParentheses": "always",
       "attributePosition": "multiline",
       "bracketSameLine": true,
       "bracketSpacing": true,
-      "jsxQuoteStyle": "single",
+      "jsxQuoteStyle": "double",
       "quoteStyle": "single",
       "semicolons": "always"
     }
   },
+
   "formatter": {
     "enabled": true,
-
     "attributePosition": "multiline",
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 90
   },
+
   "linter": {
     "enabled": true,
     "rules": {

@@ -2,7 +2,8 @@
 
 // We are purposefully importing `React` here, as the build output contains
 // references to it, and those would fail if we don't import it explicitly.
-import type React from 'react';
+// biome-ignore lint/style/useImportType: Explicitly importing `React` is intentional.
+import React from 'react';
 import { forwardRef, useCallback, useRef } from 'react';
 import type { StoredObject } from 'ronin/types';
 
@@ -195,7 +196,7 @@ const Image = forwardRef<HTMLDivElement, ImageProps>(
             height: '100%',
             objectFit: fit,
           }}
-          decoding='async'
+          decoding="async"
           onLoad={onLoad}
           loading={loading}
           ref={imageElement}

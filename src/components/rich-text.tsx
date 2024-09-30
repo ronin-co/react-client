@@ -1,4 +1,6 @@
 import type { FunctionComponent, ReactHTML, ReactNode } from 'react';
+// biome-ignore lint/correctness/noUnusedImports: Current file is a module.
+import React from 'react';
 
 type ValueOf<T> = T[keyof T];
 
