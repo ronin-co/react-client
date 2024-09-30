@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
 // We are purposefully importing `React` here, as the build output contains
 // references to it, and those would fail if we don't import it explicitly.
-import React, { useCallback, useRef, forwardRef } from "react";
-import type { StoredObject } from "ronin/types";
+import type React from 'react';
+import { forwardRef, useCallback, useRef } from 'react';
+import type { StoredObject } from 'ronin/types';
 
-const supportedFitValues = ["fill", "contain", "cover"];
+const supportedFitValues = ['fill', 'contain', 'cover'];
 
 export interface ImageProps {
   /**
@@ -27,7 +28,7 @@ export interface ImageProps {
    *
    * @default "webp"
    */
-  format?: "webp" | "jpeg" | "png" | "original";
+  format?: 'webp' | 'jpeg' | 'png' | 'original';
   /**
    * The value of a RONIN Blob field.
    */
@@ -52,11 +53,11 @@ export interface ImageProps {
    *
    * @default "cover"
    */
-  fit?: React.CSSProperties["objectFit"];
+  fit?: React.CSSProperties['objectFit'];
   /**
    * The aspect ratio of the image. Can be "square", "video", or a custom string.
    */
-  aspect?: "square" | "video" | string;
+  aspect?: 'square' | 'video' | string;
   /**
    * Indicates how the browser should load the image.
    *
@@ -66,7 +67,7 @@ export interface ImageProps {
    * image until it's reasonably certain that it will be needed. This generally
    * improves the performance of the content in most typical use cases.
    */
-  loading?: "lazy";
+  loading?: 'lazy';
   /**
    * The class names for the image container (not the image itself).
    *
@@ -87,8 +88,8 @@ const Image = forwardRef<HTMLDivElement, ImageProps>(
       size: defaultSize,
       width: defaultWidth,
       height: defaultHeight,
-      fit = "cover",
-      format = "webp",
+      fit = 'cover',
+      format = 'webp',
       quality = 80,
       aspect,
       loading,
@@ -100,7 +101,7 @@ const Image = forwardRef<HTMLDivElement, ImageProps>(
     const imageElement = useRef<HTMLImageElement | null>(null);
     const renderTime = useRef<number>(Date.now());
 
-    const isMediaObject = typeof input === "object" && input !== null;
+    const isMediaObject = typeof input === 'object' && input !== null;
     const width = defaultSize || defaultWidth;
     const height = defaultSize || defaultHeight;
 
@@ -113,8 +114,8 @@ const Image = forwardRef<HTMLDivElement, ImageProps>(
       if (duration > threshold) {
         imageElement.current?.animate(
           [
-            { filter: "blur(4px)", opacity: 0 },
-            { filter: "blur(0px)", opacity: 1 },
+            { filter: 'blur(4px)', opacity: 0 },
+            { filter: 'blur(0px)', opacity: 1 },
           ],
           {
             duration: 200,
@@ -124,31 +125,27 @@ const Image = forwardRef<HTMLDivElement, ImageProps>(
     }, []);
 
     if (!height && !width)
-      throw new Error(
-        "Either `width`, `height`, or `size` must be defined for `Image`.",
-      );
+      throw new Error('Either `width`, `height`, or `size` must be defined for `Image`.');
 
     // Validate given `quality` property.
     if (quality && (quality < 0 || quality > 100))
-      throw new Error(
-        "The given `quality` was not in the range between 0 and 100.",
-      );
+      throw new Error('The given `quality` was not in the range between 0 and 100.');
 
     const optimizationParams = new URLSearchParams({
       ...(width ? { w: width.toString() } : {}),
       ...(height ? { h: height.toString() } : {}),
-      ...(format !== "original" ? { fm: format } : {}),
+      ...(format !== 'original' ? { fm: format } : {}),
 
-      fit: supportedFitValues.includes(fit) ? fit : "cover",
+      fit: supportedFitValues.includes(fit) ? fit : 'cover',
       q: quality.toString(),
     });
 
     const responsiveOptimizationParams = new URLSearchParams({
       ...(width ? { h: (width * 2).toString() } : {}),
       ...(height ? { h: (height * 2).toString() } : {}),
-      ...(format !== "original" ? { fm: format } : {}),
+      ...(format !== 'original' ? { fm: format } : {}),
 
-      fit: supportedFitValues.includes(fit) ? fit : "cover",
+      fit: supportedFitValues.includes(fit) ? fit : 'cover',
       q: quality.toString(),
     });
 
@@ -160,30 +157,28 @@ const Image = forwardRef<HTMLDivElement, ImageProps>(
       : input;
 
     const placeholder =
-      input && typeof input !== "string" ? input.placeholder?.base64 : null;
+      input && typeof input !== 'string' ? input.placeholder?.base64 : null;
 
     return (
       <div
         ref={ref}
         className={className}
         style={{
-          position: "relative",
-          overflow: "hidden",
+          position: 'relative',
+          overflow: 'hidden',
           flexShrink: 0,
-          width: width || "100%",
-          height: height || "100%",
-          aspectRatio:
-            aspect === "video" ? "16/9" : aspect === "square" ? "1/1" : "auto",
+          width: width || '100%',
+          height: height || '100%',
+          aspectRatio: aspect === 'video' ? '16/9' : aspect === 'square' ? '1/1' : 'auto',
           ...style,
-        }}
-      >
+        }}>
         {/* Blurred preview being displayed until the actual image is loaded. */}
         {placeholder && (
           <img
             style={{
-              position: "absolute",
-              width: "100%",
-              height: "100%",
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
               objectFit: fit,
             }}
             src={placeholder}
@@ -195,12 +190,12 @@ const Image = forwardRef<HTMLDivElement, ImageProps>(
         <img
           alt={alt}
           style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
             objectFit: fit,
           }}
-          decoding="async"
+          decoding='async'
           onLoad={onLoad}
           loading={loading}
           ref={imageElement}

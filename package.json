@@ -9,28 +9,19 @@
   "scripts": {
     "dev": "bun run build -- --watch",
     "build": "tsc --project tsconfig.json",
+    "format": "bun x biome format --write .",
     "lint": "bun run lint:tsc && bun run lint:biome --",
     "lint:biome": "biome check --apply .",
     "lint:tsc": "tsc --noEmit --pretty",
     "test": "bun test",
     "prepare": "husky"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "repository": "ronin-co/react-ronin",
   "homepage": "https://github.com/ronin-co/react-ronin",
-  "keywords": [
-    "ronin",
-    "react",
-    "client",
-    "database",
-    "orm"
-  ],
+  "keywords": ["ronin", "react", "client", "database", "orm"],
   "lint-staged": {
-    "**/*": [
-      "bunx @biomejs/biome format --write"
-    ]
+    "**/*": ["bunx @biomejs/biome format --write"]
   },
   "exports": {
     ".": {
@@ -44,19 +35,15 @@
   },
   "typesVersions": {
     "*": {
-      "*": [
-        "dist/index.d.ts"
-      ],
-      "types": [
-        "dist/types.d.ts"
-      ]
+      "*": ["dist/index.d.ts"],
+      "types": ["dist/types.d.ts"]
     }
   },
   "dependencies": {
     "ronin": "4.2.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.3",
+    "@biomejs/biome": "1.9.1",
     "@types/bun": "1.1.6",
     "@types/react": "18.3.3",
     "@types/web": "0.0.155",

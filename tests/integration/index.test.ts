@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, mock, test } from "bun:test";
-import createSyntaxFactory from "ronin";
+import { beforeEach, describe, expect, mock, test } from 'bun:test';
+import createSyntaxFactory from 'ronin';
 
 let mockResolvedRequestText: string | undefined = undefined;
 
@@ -13,7 +13,7 @@ const mockFetch = mock(async (request) => {
 
 global.fetch = mockFetch;
 
-describe("factory", () => {
+describe('factory', () => {
   let { get } = {} as ReturnType<typeof createSyntaxFactory>;
 
   beforeEach(() => {
@@ -23,11 +23,9 @@ describe("factory", () => {
     mockResolvedRequestText = undefined;
   });
 
-  test("send correct `queries` for single `get` request", async () => {
+  test('send correct `queries` for single `get` request', async () => {
     await get.accounts();
 
-    expect(mockResolvedRequestText).toEqual(
-      '{"queries":[{"get":{"accounts":{}}}]}',
-    );
+    expect(mockResolvedRequestText).toEqual('{"queries":[{"get":{"accounts":{}}}]}');
   });
 });
