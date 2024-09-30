@@ -1,21 +1,19 @@
-import React, {
-  type FunctionComponent,
-  type ReactHTML,
-  type ReactNode,
-} from "react";
+import type { FunctionComponent, ReactHTML, ReactNode } from 'react';
+// biome-ignore lint/correctness/noUnusedImports: Current file is a module.
+import React from 'react';
 
 type ValueOf<T> = T[keyof T];
 
 export type RichTextContent =
   | {
       type:
-        | "doc"
-        | "paragraph"
-        | "blockquote"
-        | "codeBlock"
-        | "bulletList"
-        | "listItem"
-        | "orderedList";
+        | 'doc'
+        | 'paragraph'
+        | 'blockquote'
+        | 'codeBlock'
+        | 'bulletList'
+        | 'listItem'
+        | 'orderedList';
       // If the node is empty in the editor, it won't have `content` set. For
       // example, you might add a new empty paragraph inside the editor.
       content?: RichTextContent[];
@@ -24,19 +22,19 @@ export type RichTextContent =
       };
     }
   | {
-      type: "codeBlock";
+      type: 'codeBlock';
       // If the node is empty in the editor, it won't have `content` set. For
       // example, you might add a new empty code block inside the editor.
       attrs: {
         language: string | null;
       };
       content?: {
-        type: "text";
+        type: 'text';
         text: string;
       }[];
     }
   | {
-      type: "heading";
+      type: 'heading';
       // If the node is empty in the editor, it won't have `content` set.
       content?: RichTextContent[];
       attrs: {
@@ -44,14 +42,14 @@ export type RichTextContent =
       };
     }
   | {
-      type: "text";
+      type: 'text';
       text: string;
       marks?: (
         | {
-            type: "bold" | "italic" | "code" | "link";
+            type: 'bold' | 'italic' | 'code' | 'link';
           }
         | {
-            type: "link";
+            type: 'link';
             attrs: {
               href: string;
               target: string;
@@ -72,25 +70,24 @@ const RichText = ({
   const items = Array.isArray(data) ? data : [data];
 
   return items.map((item, position) => {
-    if (item.type === "text") {
+    if (item.type === 'text') {
       return (item.marks || []).reduce((final, mark) => {
-        let Element: keyof JSX.IntrinsicElements | ValueOf<ReactHTML> | null =
-          null;
+        let Element: keyof JSX.IntrinsicElements | ValueOf<ReactHTML> | null = null;
         let attributes = {};
 
         switch (mark.type) {
-          case "bold":
-            Element = components?.b || "b";
+          case 'bold':
+            Element = components?.b || 'b';
             break;
-          case "italic":
-            Element = components?.i || "i";
+          case 'italic':
+            Element = components?.i || 'i';
             break;
-          case "code":
-            Element = components?.code || "code";
+          case 'code':
+            Element = components?.code || 'code';
             break;
-          case "link":
-            Element = components?.a || "a";
-            if ("attrs" in mark) {
+          case 'link':
+            Element = components?.a || 'a';
+            if ('attrs' in mark) {
               attributes = {
                 // We're selecting these properties individually because the
                 // last one must be renamed.
@@ -111,11 +108,10 @@ const RichText = ({
           <RenderingElement
             {...attributes}
             key={
-              (typeof RenderingElement === "string"
+              (typeof RenderingElement === 'string'
                 ? RenderingElement
                 : RenderingElement.name) + String(position)
-            }
-          >
+            }>
             {final}
           </RenderingElement>
         ) : (
@@ -124,7 +120,7 @@ const RichText = ({
       }, item.text as ReactNode);
     }
 
-    const richtTextPrefix = "rich-text-";
+    const richtTextPrefix = 'rich-text-';
 
     let Element: keyof JSX.IntrinsicElements | ValueOf<ReactHTML> | null = null;
     let children: JSX.Element | string | null = item.content ? (
@@ -136,47 +132,46 @@ const RichText = ({
     ) : null;
     let language: string | undefined;
     switch (item.type) {
-      case "doc":
-        Element = components?.div || "div";
+      case 'doc':
+        Element = components?.div || 'div';
         break;
-      case "paragraph":
-        Element = components?.p || "p";
+      case 'paragraph':
+        Element = components?.p || 'p';
         break;
-      case "blockquote":
-        Element = components?.blockquote || "blockquote";
+      case 'blockquote':
+        Element = components?.blockquote || 'blockquote';
         break;
-      case "heading":
-        if (item.attrs.level === 1) Element = components?.h1 || "h1";
-        if (item.attrs.level === 2) Element = components?.h2 || "h2";
-        if (item.attrs.level === 3) Element = components?.h3 || "h3";
-        if (item.attrs.level === 4) Element = components?.h4 || "h4";
+      case 'heading':
+        if (item.attrs.level === 1) Element = components?.h1 || 'h1';
+        if (item.attrs.level === 2) Element = components?.h2 || 'h2';
+        if (item.attrs.level === 3) Element = components?.h3 || 'h3';
+        if (item.attrs.level === 4) Element = components?.h4 || 'h4';
         break;
-      case "codeBlock":
+      case 'codeBlock':
         {
-          Element = components?.pre || "pre";
+          Element = components?.pre || 'pre';
           // Marks are not allowed within code blocks, so we can pick its text
           // children directly, to avoid having to render React elements for
           // each line of code.
           language =
-            typeof item?.attrs.language === "undefined" ||
-            item.attrs.language === "null" ||
+            typeof item?.attrs.language === 'undefined' ||
+            item.attrs.language === 'null' ||
             item.attrs.language === null
-              ? "plaintext"
+              ? 'plaintext'
               : item?.attrs.language;
           const firstChild = item.content?.[0];
-          children =
-            firstChild && "text" in firstChild ? firstChild?.text : null;
+          children = firstChild && 'text' in firstChild ? firstChild?.text : null;
         }
         break;
-      case "bulletList":
-        Element = components?.ul || "ul";
+      case 'bulletList':
+        Element = components?.ul || 'ul';
         break;
-      case "listItem":
-        Element = components?.li || "li";
+      case 'listItem':
+        Element = components?.li || 'li';
         break;
 
-      case "orderedList":
-        Element = components?.ol || "ol";
+      case 'orderedList':
+        Element = components?.ol || 'ol';
         break;
     }
 
@@ -188,12 +183,11 @@ const RichText = ({
     return RenderingElement ? (
       <RenderingElement
         key={
-          (typeof RenderingElement === "string"
+          (typeof RenderingElement === 'string'
             ? RenderingElement
             : RenderingElement.name) + String(position)
         }
-        language={language}
-      >
+        language={language}>
         {children}
       </RenderingElement>
     ) : (

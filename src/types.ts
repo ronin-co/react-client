@@ -1,3 +1,3 @@
-export type * from "ronin/types";
+export type * from 'ronin/types';
 
-export type { RichTextContent } from "./components/rich-text";
+export type { RichTextContent } from './components/rich-text';
