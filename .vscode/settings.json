@@ -15,6 +15,7 @@
   "typescript.suggest.autoImports": true,
   "typescript.preferences.quoteStyle": "single",
   "javascript.preferences.quoteStyle": "single",
+
   "[json][javascript][javascriptreact][typescript][typescriptreact]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
@@ -24,7 +25,5 @@
 
   "yaml.schemas": {
     "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml"
-  },
-
-  "tailwindCSS.colorDecorators": false
+  }
 }
