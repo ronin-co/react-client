@@ -17,7 +17,7 @@
     "lint:tsc": "tsc --pretty",
     "format": "biome check --write && biome format --write",
     "test": "bun test",
-    "build": "tsup ./src/index.ts --dts --format esm",
+    "build": "tsup ./src/index.ts --dts-resolve --format esm",
     "prepare": "bun run build"
   },
   "keywords": [
@@ -30,6 +30,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@ronin/compiler": "0.14.14",
     "@types/bun": "1.2.1",
     "@types/react": "18.3.1",
     "msw": "2.7.0",
