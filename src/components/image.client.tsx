@@ -1,7 +1,7 @@
 'use client';
 
+import type { StoredObject } from '@ronin/compiler';
 import { forwardRef, useCallback, useRef } from 'react';
-import type { StoredObject } from 'ronin/types';
 
 const supportedFitValues = ['fill', 'contain', 'cover'];
 
