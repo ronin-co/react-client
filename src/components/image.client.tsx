@@ -5,7 +5,7 @@ import { forwardRef, useCallback, useRef } from 'react';
 
 const supportedFitValues = ['fill', 'contain', 'cover'];
 
-export interface ImageProps {
+interface ImageProps {
   /**
    * Defines text that can replace the image in the page.
    */

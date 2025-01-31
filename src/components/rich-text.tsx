@@ -2,7 +2,7 @@ import type { FunctionComponent, ReactHTML, ReactNode } from 'react';
 
 type ValueOf<T> = T[keyof T];
 
-export type RichTextContent =
+type RichTextContent =
   | {
       type:
         | 'doc'
@@ -58,14 +58,13 @@ export type RichTextContent =
       )[];
     };
 
-export const RichText = ({
-  data,
-  components,
-}: {
-  data: RichTextContent | RichTextContent[];
+interface RichTextProps {
+  data: unknown;
   components?: ReactHTML;
-}) => {
-  const items = Array.isArray(data) ? data : [data];
+}
+
+export const RichText = ({ data, components }: RichTextProps) => {
+  const items: RichTextContent[] = Array.isArray(data) ? data : [data];
 
   return items.map((item, position) => {
     if (item.type === 'text') {
