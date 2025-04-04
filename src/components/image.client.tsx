@@ -5,7 +5,7 @@ import { forwardRef, useCallback, useRef } from 'react';
 
 const supportedFitValues = ['fill', 'contain', 'cover'];
 
-interface ImageProps {
+interface BaseImageProps {
   /**
    * Defines text that can replace the image in the page.
    */
@@ -30,19 +30,6 @@ interface ImageProps {
    * The value of a RONIN blob field.
    */
   src: string | StoredObject;
-  /**
-   * The intrinsic size of the image in pixels, if its width and height are the same.
-   * Must be an integer without a unit.
-   */
-  size?: number;
-  /**
-   * The intrinsic width of the image in pixels. Must be an integer without a unit.
-   */
-  width?: number;
-  /**
-   * The intrinsic height of the image, in pixels. Must be an integer without a unit.
-   */
-  height?: number;
   /**
    * Specifies how the image should be resized to fit its container.
    *
@@ -72,6 +59,40 @@ interface ImageProps {
    */
   style?: React.CSSProperties;
 }
+
+type ImageProps = BaseImageProps &
+  (
+    | {
+        /**
+         * The intrinsic size of the image in pixels, if its width and height are the same.
+         * Must be an integer without a unit.
+         */
+        size: number;
+        /**
+         * The intrinsic width of the image in pixels. Must be an integer without a unit.
+         */
+        width?: never;
+        /**
+         * The intrinsic height of the image, in pixels. Must be an integer without a unit.
+         */
+        height?: never;
+      }
+    | {
+        /**
+         * The intrinsic size of the image in pixels, if its width and height are the same.
+         * Must be an integer without a unit.
+         */
+        size?: never;
+        /**
+         * The intrinsic width of the image in pixels. Must be an integer without a unit.
+         */
+        width: number;
+        /**
+         * The intrinsic height of the image, in pixels. Must be an integer without a unit.
+         */
+        height: number;
+      }
+  );
 
 export const Image = forwardRef<HTMLDivElement, ImageProps>(
   (
@@ -155,7 +176,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
     return (
       <div
         ref={ref}
-        className={className}
+        class={className}
         style={{
           position: 'relative',
           overflow: 'hidden',
@@ -188,7 +209,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
             height: '100%',
             objectFit: fit,
           }}
-          decoding="async"
+          decoding='async'
           onLoad={onLoad}
           loading={loading}
           ref={imageElement}
