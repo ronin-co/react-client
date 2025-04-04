@@ -14,7 +14,7 @@ type RichTextContent =
         | 'orderedList';
       // If the node is empty in the editor, it won't have `content` set. For example,
       // you might add a new empty paragraph inside the editor.
-      content?: RichTextContent[];
+      content?: Array<RichTextContent>;
       attrs: {
         language: string | null;
       };
@@ -26,15 +26,15 @@ type RichTextContent =
       attrs: {
         language: string | null;
       };
-      content?: {
+      content?: Array<{
         type: 'text';
         text: string;
-      }[];
+      }>;
     }
   | {
       type: 'heading';
       // If the node is empty in the editor, it won't have `content` set.
-      content?: RichTextContent[];
+      content?: Array<RichTextContent>;
       attrs: {
         level: 1 | 2 | 3 | 4;
       };
@@ -42,7 +42,7 @@ type RichTextContent =
   | {
       type: 'text';
       text: string;
-      marks?: (
+      marks?: Array<
         | {
             type: 'bold' | 'italic' | 'code' | 'link';
           }
@@ -55,7 +55,7 @@ type RichTextContent =
               class: string;
             };
           }
-      )[];
+      >;
     };
 
 interface RichTextProps {
@@ -64,7 +64,7 @@ interface RichTextProps {
 }
 
 export const RichText = ({ data, components }: RichTextProps) => {
-  const items: RichTextContent[] = Array.isArray(data) ? data : [data];
+  const items: Array<RichTextContent> = Array.isArray(data) ? data : [data];
 
   return items.map((item, position) => {
     if (item.type === 'text') {
@@ -82,7 +82,7 @@ export const RichText = ({ data, components }: RichTextProps) => {
           case 'code':
             Element = components?.code || 'code';
             break;
-          case 'link':
+          case 'link': {
             Element = components?.a || 'a';
             if ('attrs' in mark) {
               attributes = {
@@ -95,6 +95,7 @@ export const RichText = ({ data, components }: RichTextProps) => {
               };
             }
             break;
+          }
         }
 
         const RenderingElement = Element as FunctionComponent<{
@@ -138,12 +139,13 @@ export const RichText = ({ data, components }: RichTextProps) => {
       case 'blockquote':
         Element = components?.blockquote || 'blockquote';
         break;
-      case 'heading':
+      case 'heading': {
         if (item.attrs.level === 1) Element = components?.h1 || 'h1';
         if (item.attrs.level === 2) Element = components?.h2 || 'h2';
         if (item.attrs.level === 3) Element = components?.h3 || 'h3';
         if (item.attrs.level === 4) Element = components?.h4 || 'h4';
         break;
+      }
       case 'codeBlock':
         {
           Element = components?.pre || 'pre';

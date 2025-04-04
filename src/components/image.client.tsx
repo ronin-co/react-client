@@ -138,7 +138,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
       }
     }, []);
 
-    if (!height && !width)
+    if (!(height || width))
       throw new Error('Either `width`, `height`, or `size` must be defined for `Image`.');
 
     // Validate given `quality` property.
@@ -176,7 +176,8 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
     return (
       <div
         ref={ref}
-        class={className}
+        // biome-ignore lint/suspicious/noReactSpecificProps: This is a React library so React specific props are allowed.
+        className={className}
         style={{
           position: 'relative',
           overflow: 'hidden',
@@ -188,6 +189,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
         }}>
         {/* Blurred preview being displayed until the actual image is loaded. */}
         {placeholder && (
+          // biome-ignore lint/nursery/noImgElement: An image component requires a `<img />` element.
           <img
             style={{
               position: 'absolute',
@@ -201,6 +203,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
         )}
 
         {/* The optimized image, responsive to the specified size. */}
+        {/* biome-ignore lint/nursery/noImgElement: An image component requires a `<img />` element. */}
         <img
           alt={alt}
           style={{
