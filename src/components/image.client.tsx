@@ -5,7 +5,7 @@ import { forwardRef, useCallback, useRef } from 'react';
 
 const supportedFitValues = ['fill', 'contain', 'cover'];
 
-interface ImageProps {
+interface BaseImageProps {
   /**
    * Defines text that can replace the image in the page.
    */
@@ -30,19 +30,6 @@ interface ImageProps {
    * The value of a RONIN blob field.
    */
   src: string | StoredObject;
-  /**
-   * The intrinsic size of the image in pixels, if its width and height are the same.
-   * Must be an integer without a unit.
-   */
-  size?: number;
-  /**
-   * The intrinsic width of the image in pixels. Must be an integer without a unit.
-   */
-  width?: number;
-  /**
-   * The intrinsic height of the image, in pixels. Must be an integer without a unit.
-   */
-  height?: number;
   /**
    * Specifies how the image should be resized to fit its container.
    *
@@ -72,6 +59,55 @@ interface ImageProps {
    */
   style?: React.CSSProperties;
 }
+
+type ImageProps = BaseImageProps &
+  (
+    | {
+        /**
+         * The intrinsic size of the image in pixels, if its width and height are the same.
+         * Must be an integer without a unit.
+         */
+        size: number;
+        /**
+         * The intrinsic width of the image in pixels. Must be an integer without a unit.
+         */
+        width?: never;
+        /**
+         * The intrinsic height of the image, in pixels. Must be an integer without a unit.
+         */
+        height?: never;
+      }
+    | {
+        /**
+         * The intrinsic size of the image in pixels, if its width and height are the same.
+         * Must be an integer without a unit.
+         */
+        size?: never;
+        /**
+         * The intrinsic width of the image in pixels. Must be an integer without a unit.
+         */
+        width?: number;
+        /**
+         * The intrinsic height of the image, in pixels. Must be an integer without a unit.
+         */
+        height: number;
+      }
+    | {
+        /**
+         * The intrinsic size of the image in pixels, if its width and height are the same.
+         * Must be an integer without a unit.
+         */
+        size?: never;
+        /**
+         * The intrinsic width of the image in pixels. Must be an integer without a unit.
+         */
+        width: number;
+        /**
+         * The intrinsic height of the image, in pixels. Must be an integer without a unit.
+         */
+        height?: number;
+      }
+  );
 
 export const Image = forwardRef<HTMLDivElement, ImageProps>(
   (
@@ -117,7 +153,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
       }
     }, []);
 
-    if (!height && !width)
+    if (!(height || width))
       throw new Error('Either `width`, `height`, or `size` must be defined for `Image`.');
 
     // Validate given `quality` property.
@@ -155,6 +191,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
     return (
       <div
         ref={ref}
+        // biome-ignore lint/suspicious/noReactSpecificProps: This is a React library so React specific props are allowed.
         className={className}
         style={{
           position: 'relative',
@@ -167,6 +204,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
         }}>
         {/* Blurred preview being displayed until the actual image is loaded. */}
         {placeholder && (
+          // biome-ignore lint/nursery/noImgElement: An image component requires a `<img />` element.
           <img
             style={{
               position: 'absolute',
@@ -180,6 +218,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
         )}
 
         {/* The optimized image, responsive to the specified size. */}
+        {/* biome-ignore lint/nursery/noImgElement: An image component requires a `<img />` element. */}
         <img
           alt={alt}
           style={{
@@ -188,7 +227,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(
             height: '100%',
             objectFit: fit,
           }}
-          decoding="async"
+          decoding='async'
           onLoad={onLoad}
           loading={loading}
           ref={imageElement}
