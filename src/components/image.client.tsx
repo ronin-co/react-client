@@ -86,11 +86,26 @@ type ImageProps = BaseImageProps &
         /**
          * The intrinsic width of the image in pixels. Must be an integer without a unit.
          */
-        width: number;
+        width?: number;
         /**
          * The intrinsic height of the image, in pixels. Must be an integer without a unit.
          */
         height: number;
+      }
+    | {
+        /**
+         * The intrinsic size of the image in pixels, if its width and height are the same.
+         * Must be an integer without a unit.
+         */
+        size?: never;
+        /**
+         * The intrinsic width of the image in pixels. Must be an integer without a unit.
+         */
+        width: number;
+        /**
+         * The intrinsic height of the image, in pixels. Must be an integer without a unit.
+         */
+        height?: number;
       }
   );
 
