@@ -30,24 +30,16 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@ronin/compiler": "0.14.14",
     "@types/bun": "1.2.1",
     "@types/react": "18.3.1",
-    "msw": "2.7.0",
+    "msw": "2.8.6",
     "react": "18.3.1",
-    "tsup": "8.3.6",
-    "typescript": "5.7.3"
+    "tsup": "8.5.0",
+    "typescript": "5.8.3"
   },
   "peerDependencies": {
     "react": ">=18.3.1",
-    "ronin": ">=6.0.29"
-  },
-  "peerDependenciesMeta": {
-    "react": {
-      "optional": false
-    },
-    "ronin": {
-      "optional": false
-    }
+    "ronin": ">=6.6.13",
+    "@ronin/compiler": ">=0.18.7"
   }
 }
